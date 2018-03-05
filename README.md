@@ -13,3 +13,4 @@ Saker vi vill ha:
 * Kunna skicka sms?
 * Kunna ha översikt över inbetalningar av medlemsavgift
 * kunna skicka ut påminnelser om att betala medlemsavgiften
+* (eventuellt) kunna ta ut fil över inbetalda medlemsavgifter för import i andra system
