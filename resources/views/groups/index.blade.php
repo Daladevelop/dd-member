@@ -9,8 +9,7 @@
             <div class="row items-push">
                 <div class="col-sm-7">
                     <h1 class="page-heading">
-
-                        Medlemsförteckning
+                        Grupper
                     </h1>
                 </div>
 
@@ -23,7 +22,7 @@
             <!-- My Block -->
             <div class="block">
                 <div class="block-header">
-                    <a class="btn btn-success" href="{{route('users.create')}}"><i class="si si-user"></i> Skapa ny</a>
+                    <a class="btn btn-success" href="{{route('groups.create')}}"><i class="si si-user"></i> Skapa ny</a>
 
                 </div>
                 <div class="block-content">
@@ -31,20 +30,18 @@
                         <thead>
                             <tr>
                                 <th>Namn</th>
-                                <th>Ort</th>
-                                <th>Epost</th>
-                                <th>Telefonnummer</th>
+                                <th>Beskrivning</th>
+                                <th>Antal medlemmar</th>
                                 <th>Verktyg</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($groups as $group)
                             <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->city}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
-                                <td><a class="btn btn-warning" href="{{route('users.edit', $user->id)}}"><i class="fa fa-edit"></i></a></td>
+                                <td>{{$group->name}}</td>
+                                <td>{{$group->description}}</td>
+                                <td>{{$group->member_count}}</td>
+                                <td><a class="btn btn-warning" href="{{route('groups.edit', $group->id)}}"><i class="fa fa-edit"></i></a></td>
                             </tr>
                         @endforeach
                         </tbody>

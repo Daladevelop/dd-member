@@ -14,9 +14,9 @@ class checkAbilities
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$ability)
     {
-        if(!(Auth::User()->can('edit_users'))){
+        if(!(Auth::User()->can($ability))){
             return redirect('/');
         }
 
