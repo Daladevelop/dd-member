@@ -73,6 +73,8 @@ class CreateBouncerTables extends Migration
                   ->onUpdate('cascade')->onDelete('cascade');
         });
 
+
+        // Create admin role and give it ability to edit_users
         Bouncer::allow('admin')->to('edit_users');
     }
 
