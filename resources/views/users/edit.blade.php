@@ -63,7 +63,11 @@
                     @if(Auth::user()->can('edit_users'))
                         <div class="form-group">
                             {{Form::label('admin', 'Administratör', ['class' => 'col-md-3'])}}
-                            {{Form::checkbox('admin', true)}}
+                            @if($user && Bouncer::is($user)->a('admin'))
+                            {{Form::checkbox('admin', null, ['checked'])}}
+                            @else
+                            {{Form::checkbox('admin', null)}}
+                            @endif
                         </div>
                     @endif
                         <div class="col-md-offset-1 col-md-3"></div>

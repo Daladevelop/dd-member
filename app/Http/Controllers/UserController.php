@@ -38,7 +38,7 @@ class UserController extends Controller
             Bouncer::assign('admin')->to($user);
         } else {
             if (Bouncer::is($user)->a('admin'))
-                Bouncer::retract('admin')->to($user);
+                Bouncer::retract('admin')->from($user);
         }
 
         $user->save();
@@ -69,7 +69,7 @@ class UserController extends Controller
                 Bouncer::assign('admin')->to($user);
             } else {
                 if (Bouncer::is($user)->a('admin'))
-                    Bouncer::retract('admin')->to($user);
+                    Bouncer::retract('admin')->from($user);
             }
 
         }
