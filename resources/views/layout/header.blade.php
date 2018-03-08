@@ -106,7 +106,9 @@
                         <h3 class="block-title">Block</h3>
                     </div>
                     <div class="block-content">
-                        <p>...</p>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </div>
                 </div>
                 <!-- END Block -->
@@ -158,6 +160,12 @@
                             <li>
                                 <a href="{{route('mail.create')}}?type=to-all"><i class="si si-envelope"></i><span
                                                 class="sidebar-mini-hide">Maila alla</span></a>
+                            </li>
+                        @endif
+                        @if(Bouncer::can('edit_events'))
+                            <li>
+                                <a href="{{route('events.index')}}"><i class="si si-calendar"></i><span
+                                                class="sidebar-mini-hide">Evenemang</span></a>
                             </li>
                         @endif
 

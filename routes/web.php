@@ -31,3 +31,13 @@ Route::prefix('/mail')->middleware('auth')->group(function(){
    Route::get('/create','MailController@createFromQuery')->name('mail.create')->middleware('check.ability:send_email');;;
    Route::post('/create', 'MailController@sendMail')->name('mail.send')->middleware('check.ability:send_email');;;
 });
+
+Route::prefix('/event')->middleware('auth')->group(function(){
+    Route::get('', 'EventController@index')->name('events.index')->middleware('check.ability:edit_events');
+    Route::get('/edit/{id}', 'EventController@edit')->name('events.edit')->middleware('check.ability:edit_events');
+    Route::post('/edit/{id}', 'EventController@update')->name('events.update')->middleware('check.ability:edit_events');
+    Route::get('/create', 'EventController@create')->name('events.create')->middleware('check.ability:edit_events');
+    Route::post('/create', 'EventController@store')->name('events.store')->middleware('check.ability:edit_events');
+    Route::get('/delete/{id}', 'EventController@confirmDelete')->name('events.confirmDelete')->middleware('check.ability:delete_events');
+    Route::delete('/delete/{id}', 'EventController@delete')->name('events.delete')->middleware('check.ability:delete_events');
+});
