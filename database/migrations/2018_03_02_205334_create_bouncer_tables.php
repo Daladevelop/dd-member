@@ -75,7 +75,7 @@ class CreateBouncerTables extends Migration
 
 
         // Create admin role and give it ability to edit_users
-        Bouncer::allow('admin')->to('edit_users');
+        Bouncer::allow('admin')->everything();
     }
 
     /**

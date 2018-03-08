@@ -15,3 +15,8 @@ Saker vi vill ha:
 * kunna skicka ut påminnelser om att betala medlemsavgiften
 * ta betalt direkt i systemet? 'autogiro' ?
 * (eventuellt) kunna ta ut fil över inbetalda medlemsavgifter för import i andra system
+
+
+Helper functions
+\App\Helpers\Helper::message($title,$content,$type)
+genererar ett meddelande i toppen. type ska vara bootstrap typ, success, danger, warning etc

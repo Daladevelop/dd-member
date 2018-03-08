@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <!-- Main Container -->
-    <main id="main-container">
+
+        @include('partials.message')
         <!-- Page Header -->
         <div class="content bg-gray-lighter">
             <div class="row items-push">
@@ -22,14 +22,21 @@
             <!-- My Block -->
             <div class="block">
                 <div class="block-header">
-                    <strong>Innehåll</strong>
+                    <strong>{{$recipient_string}}</strong>
 
                 </div>
                 <div class="block-content">
                    {!! Form::open() !!}
+                    {!! Form::hidden('type', $type) !!}
+                    {!! Form::hidden('type_id', $type_id) !!}
+                    {!! Form::hidden('recipient_string', $recipient_string) !!}
                     <div class="form-group">
                         {{Form::label('to', 'Mottagare', ['class' => 'col-md-3'])}}
-                        {{Form::text('to', $recipients, ['form-control'])}}
+                        <div>
+                            @foreach($recipients as $recipient)
+                                {{$recipient->name}},
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -37,10 +44,11 @@
                         {{Form::text('subject', null, ['form-control'])}}
                     </div>
                     <div class="form-group">
-                        {{Form::label('content', 'Innehåll', ['class' => 'col-md-3'])}}
-                        {{Form::textarea('content', null, ['form-control'])}}
+                        {{Form::label('maincontent', 'Innehåll', ['class' => 'col-md-3'])}}
+                        {{Form::textarea('maincontent', null, ['form-control'])}}
                     </div>
 
+                    {{Form::submit('Skicka mail', ['class' => 'btn btn-success'])}}
 
 
                 </div>
@@ -52,7 +60,6 @@
 
         </div>
         <!-- END Page Content -->
-    </main>
-    <!-- END Main Container -->
+
 
 @endsection

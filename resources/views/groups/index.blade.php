@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <!-- Main Container -->
-    <main id="main-container">
         <!-- Page Header -->
         <div class="content bg-gray-lighter">
             <div class="row items-push">
@@ -41,7 +39,10 @@
                                 <td>{{$group->name}}</td>
                                 <td>{{$group->description}}</td>
                                 <td>{{$group->member_count}}</td>
-                                <td><a class="btn btn-warning" href="{{route('groups.edit', $group->id)}}"><i class="fa fa-edit"></i></a></td>
+                                <td>
+                                    <a class="btn btn-warning" href="{{route('groups.edit', $group->id)}}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-success" href="{{route('mail.create')}}?type=to-group&id={{$group->id}}" alt="Skicka mail"><i class="si si-envelope"></i></a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -51,7 +52,6 @@
             <!-- END My Block -->
         </div>
         <!-- END Page Content -->
-    </main>
-    <!-- END Main Container -->
+
 
 @endsection

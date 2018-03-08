@@ -144,14 +144,20 @@
                     <ul class="nav-main">
                         @if(Bouncer::can('edit_users'))
                             <li>
-                                <a class="active" href="{{route('users.index')}}"><i class="si si-user"></i><span
+                                <a href="{{route('users.index')}}"><i class="si si-user"></i><span
                                         class="sidebar-mini-hide">Medlemmar</span></a>
                             </li>
                         @endif
                         @if(Bouncer::can('edit_groups'))
                             <li>
-                                <a class="active" href="{{route('groups.index')}}"><i class="si si-users"></i><span
+                                <a href="{{route('groups.index')}}"><i class="si si-users"></i><span
                                             class="sidebar-mini-hide">Grupper</span></a>
+                            </li>
+                        @endif
+                        @if(Bouncer::can('send_email'))
+                            <li>
+                                <a href="{{route('mail.create')}}?type=to-all"><i class="si si-envelope"></i><span
+                                                class="sidebar-mini-hide">Maila alla</span></a>
                             </li>
                         @endif
 
@@ -196,3 +202,6 @@
         <!-- END Header Navigation Left -->
     </header>
     <!-- END Header -->
+    <!-- Main Container -->
+    <main id="main-container">
+        @include('partials.message')

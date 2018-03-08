@@ -2,8 +2,7 @@
 
 @section('content')
 
-    <!-- Main Container -->
-    <main id="main-container">
+
         <!-- Page Header -->
         <div class="content bg-gray-lighter">
             <div class="row items-push">
@@ -51,7 +50,6 @@
             <!-- END My Block -->
         </div>
         <!-- END Page Content -->
-    </main>
-    <!-- END Main Container -->
+
 
 @endsection
