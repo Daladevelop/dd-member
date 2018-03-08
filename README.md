@@ -8,8 +8,9 @@ Saker som finns:
 * medlemsförteckning
 
 Saker vi vill ha:
---* Kunna skapa grupper och lägga till medlemmar i grupperna
---* Kunna skapa mail och skicka till medlemmar / grupper
+
+~~* Kunna skapa grupper och lägga till medlemmar i grupperna ~~
+~~* Kunna skapa mail och skicka till medlemmar / grupper~~
 * Kunna ta bort medlemmar ur grupper. :) 
 * Kunna skicka sms?
 * Kunna ha översikt över inbetalningar av medlemsavgift
