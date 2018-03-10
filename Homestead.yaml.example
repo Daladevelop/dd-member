@@ -2,7 +2,7 @@
 ip: "10.10.10.110"
 memory: 2048
 cpus: 1
-hostname: atb.app
+hostname: dd-member.app
 name: atb
 provider: virtualbox
 
@@ -12,12 +12,12 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "/home/larsemil/programmering/php/atb"
-      to: "/home/vagrant/atb"
+    - map: "/home/USERNAME/dd-member"
+      to: "/home/vagrant/dd-member"
 
 sites:
-    - map: atb.app
-      to: "/home/vagrant/atb/public"
+    - map: dd-member.app
+      to: "/home/vagrant/dd-member/public"
 
 databases:
     - homestead
