@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Silber\Bouncer\BouncerFacade as Bouncer;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,10 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $user = new App\User;
         $user->name = "Administrator";
-        $user->email = "admin@admin.com";
+        $user->email = "admin@example.com";
         $user->password = bcrypt('admin');
         $user->personal_number = '123';
         $user->city = 'Staden';
+        $user->phone = '123';
         $user->save();
         Bouncer::assign('admin')->to($user);
         /* DB::table('users')->insert([
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
         ]); */
+        echo 'Created user admin@example.com with password admin';
 
         $event = new App\Event;
         $event->name = "My first event";
