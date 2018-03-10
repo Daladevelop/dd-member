@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Helpers\Helper;
 use App\Event;
 use Bouncer;
 
@@ -39,6 +40,7 @@ class EventController extends Controller
         }
 
         $event->save();
+        Helper::message('Event skapat', $event->name.' är nu skapat', 'success');
         return redirect()->route('events.index');
     }
 
@@ -67,8 +69,8 @@ class EventController extends Controller
         }
         $event->fill($request->all());
         $event->save();
-
-        return redirect()->route('events.index');
+        Helper::message('Event uppdaterat', $event->name.' är nu uppdaterat.', 'success');
+        return redirect()->back();
 
     }
 
@@ -86,7 +88,7 @@ class EventController extends Controller
         $event = Event::Find($id);
 
         $event->forceDelete();
-
+        Helper::message('Event borttaget', $event->name.' är nu borttaget', 'success');
         return redirect()->route('events.index');
     }
 }
