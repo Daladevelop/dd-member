@@ -62,7 +62,7 @@
 
 
                         @foreach($group->users as $user)
-                            <p>{{$user->name}}</p>
+                            <a href="{{route('groups.removemember',[ $group->id, $user->id])}}" class="label label-danger"><i class="si si-close"></i> {{$user->name}}</a>
                         @endforeach
                         <hr/>
                         {!! Form::open(['route' => ['groups.addmember', $group->id]]) !!}

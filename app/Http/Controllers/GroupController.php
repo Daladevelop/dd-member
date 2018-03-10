@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\MemberGroup;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,15 @@ class GroupController extends Controller
             if(!$group->users->contains($user)){
                 $group->users()->attach($user);
             }
+        }
+        return redirect()->back();
+    }
+
+    public function removeGroupMember($group_id, $user_id){
+        if($user = \App\User::find($user_id)){
+            $user->groups()->detach($group_id);
+            Helper::message('Användare borttagen från grupp', $user->name.' är borttagen från gruppen', 'success');
+            return redirect()->back();
         }
         return redirect()->back();
     }

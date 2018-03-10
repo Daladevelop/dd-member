@@ -25,6 +25,7 @@ Route::prefix('/groups')->middleware('auth')->group(function() {
     Route::get('/edit/{id}','GroupController@edit')->name('groups.edit')->middleware('check.ability:edit_groups');
     Route::post('/edit/{id}', 'GroupController@update')->name('groups.update')->middleware('check.ability:edit_groups');
     Route::post('/addmember/{group_id}', 'GroupController@addGroupMember')->name('groups.addmember')->middleware('check.ability:edit_groups');
+    Route::get('/removemember/{group_id}/{user_id}', 'GroupController@removeGroupMember')->name('groups.removemember')->middleware('check.ability:edit_groups');
 });
 
 Route::prefix('/mail')->middleware('auth')->group(function(){
