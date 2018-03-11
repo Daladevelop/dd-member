@@ -48,4 +48,7 @@ Route::prefix('/event')->middleware('auth')->group(function(){
 
 Route::prefix('/payment')->middleware('auth')->group(function() {
     Route::get('', 'PaymentController@index')->name('payments.index')->middleware('check.ability:edit_payments');
+    Route::get('/myPayments', 'PaymentController@myPayments')->name('payments.myPayments');
+    Route::post('/pay/{id}', 'PaymentController@pay')->name('payments.pay');
+    Route::get('/pay/{id}', 'PaymentController@paymentInstruction')->name('payments.paymentInstruction');
 });

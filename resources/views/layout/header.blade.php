@@ -168,8 +168,13 @@
                                                 class="sidebar-mini-hide">Evenemang</span></a>
                             </li>
                             <li>
+                                @if(Bouncer::can('edit_payments'))
                                     <a href="{{route('payments.index')}}"><i class="si si-wallet"></i><span
                                                     class="sidebar-mini-hide">Betalningar</span></a>
+                                @else
+                                <a href="{{route('payments.myPayments')}}"><i class="si si-wallet"></i><span
+                                    class="sidebar-mini-hide">Betalningar</span></a>
+                                @endif
                                 </li>
                     </ul>
                 </div>

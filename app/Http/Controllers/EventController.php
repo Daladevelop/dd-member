@@ -122,7 +122,7 @@ class EventController extends Controller
             $payment->user_id = Auth::id();
             $payment->amount = $event->cost;
             if ($event->cost == 0)
-                $payment->paid_date = Carbon\Carbon::now();
+                $payment->payment_date = \Carbon\Carbon::now();
             $event->payments()->save($payment);
         }
         
