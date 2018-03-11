@@ -18,9 +18,20 @@
         <!-- END Page Header -->
 
         <!-- Page Content -->
+
         <div class="content">
+            <div class="block">
+                <div class="block-header">
+                    <h3>Anmäld till följande event:</h3>
+                </div>
+                <div class="block-content">
+                    @foreach($registrations as $registration)
+                        <a href="{{ route('events.show', $registration->event_id) }}">{{$registration->event->name}}</a><br/>
+                    @endforeach
+                </div>
             <!-- My Block -->
             <div class="block">
+
                 <div class="block-header">
                     <a class="btn btn-success" href="{{route('events.create')}}"><i class="si si-calendar"></i> Skapa nytt</a>
 
@@ -37,6 +48,9 @@
                                 <th>Max deltagare</th>
                                 <th>Endast medlemmar</th>
                                 <th></th>
+                                @if(Bouncer::can('delete_events') || Bouncer::can('edit_events'))
+                                <th></th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -50,8 +64,16 @@
                                 <td>{{$event->max_participants}}</td>
                                 <td>@if($event->members_only == 1) Ja @else Nej @endif</td>
                                 <td>
-                                    <a href="{{route('events.edit', $event->id)}}"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('events.signup',$event->id) }}" onclick="event.preventDefault(); document.getElementById('signup-form').submit();">Anmäl</a>
+                                        <form id="signup-form" action="{{ route('events.signup', $event->id) }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                                </td>
+                                <td>
+                                    @if(Bouncer::can('edit_events'))
+                                        <a href="{{route('events.edit', $event->id)}}"><i class="fa fa-edit"></i></a>
+                                    @endif
+                                    @if(Bouncer::can('delete_events'))
                                     <a href="{{route('events.confirmDelete', $event->id)}}"><i class="fa fa-remove"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

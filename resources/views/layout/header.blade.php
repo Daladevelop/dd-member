@@ -106,6 +106,7 @@
                         <h3 class="block-title">Block</h3>
                     </div>
                     <div class="block-content">
+                        <a href="{{ route('users.edit',Auth::id()) }}">Min profil</a><br/>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
@@ -162,13 +163,10 @@
                                                 class="sidebar-mini-hide">Maila alla</span></a>
                             </li>
                         @endif
-                        @if(Bouncer::can('edit_events'))
                             <li>
                                 <a href="{{route('events.index')}}"><i class="si si-calendar"></i><span
                                                 class="sidebar-mini-hide">Evenemang</span></a>
                             </li>
-                        @endif
-
                     </ul>
                 </div>
                 <!-- END Side Content -->

@@ -1,5 +1,5 @@
 @if(session()->has('message_content'))
-    <div class="col-md-6">
+    <div class="col-md-6" id="flashmessage">
         <div class="block block-themed">
             <div class="block-header bg-{{session()->get('message_type')}}">
                 <h3 class="block-title">

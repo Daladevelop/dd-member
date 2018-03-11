@@ -20,11 +20,6 @@ class DatabaseSeeder extends Seeder
         $user->phone = '123';
         $user->save();
         Bouncer::assign('admin')->to($user);
-        /* DB::table('users')->insert([
-            'name' => 'Administrator',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin'),
-        ]); */
         echo 'Created user admin@example.com with password admin';
 
         $event = new App\Event;
@@ -36,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $event->max_participants = "30";
         $event->members_only = true;
         $event->save();
+        echo 'Created sample event';
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use Payable;
+    Use Payable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +17,4 @@ class Event extends Model
     protected $fillable = [
         'name', 'description', 'start_date','end_date', 'cost', 'max_participants', 'members_only'
     ];
-
-    
 }

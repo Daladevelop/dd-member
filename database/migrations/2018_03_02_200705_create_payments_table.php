@@ -17,9 +17,9 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('amount');
-            $table->text('paymentable_type');
-            $table->text('paymentable_id');
-            $table->dateTime('payment_date');
+            $table->text('payable_type');
+            $table->text('payable_id');
+            $table->dateTime('payment_date')->nullable();
             $table->timestamps();
         });
     }
