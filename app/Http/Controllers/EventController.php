@@ -30,7 +30,7 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
-        if (!$event)
+        if (!isset($event))
             return redirect()->back();
         
         return view('events.show')->with(['event' => $event]);
