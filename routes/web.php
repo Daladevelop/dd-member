@@ -45,3 +45,7 @@ Route::prefix('/event')->middleware('auth')->group(function(){
     Route::get('/signup/{id}', 'EventController@signup')->name('events.signup');
     Route::get('/cancelSignup/{id}','EventController@cancelSignup')->name('events.cancelSignup');
 });
+
+Route::prefix('/payment')->middleware('auth')->group(function() {
+    Route::get('', 'PaymentController@index')->name('payments.index')->middleware('check.ability:edit_payments');
+});

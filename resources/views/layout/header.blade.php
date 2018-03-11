@@ -167,6 +167,10 @@
                                 <a href="{{route('events.index')}}"><i class="si si-calendar"></i><span
                                                 class="sidebar-mini-hide">Evenemang</span></a>
                             </li>
+                            <li>
+                                    <a href="{{route('payments.index')}}"><i class="si si-wallet"></i><span
+                                                    class="sidebar-mini-hide">Betalningar</span></a>
+                                </li>
                     </ul>
                 </div>
                 <!-- END Side Content -->
