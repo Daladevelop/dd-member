@@ -111,7 +111,7 @@ class EventController extends Controller
         return redirect()->route('events.index');
     }
 
-    public function signup($id, Request $request)
+    public function signup($id)
     {
         $event = Event::Find($id);
 
@@ -127,7 +127,7 @@ class EventController extends Controller
         }
         
         // Behövs denna koll??
-        if (Registration::Where([['user_id','=',Auth::id()],['event_id','=',$event->id]])->count() > 0) {
+        if (Registration::Where(['user_id'=>Auth::id(), 'event_id'=>$event->id])->count() > 0) {
             Helper::message('Redan anmäld', 'Du är redan anmäld till evenemangent ' . $event->name, 'warning');
             return redirect()->back();
         }
@@ -136,6 +136,26 @@ class EventController extends Controller
         Auth::user()->registrations()->save($registration);
 
         Helper::message('Anmäld','Du är nu anmäld till evenemanget ' . $event->name, 'success');
+        return redirect()->back();
+    }
+    public function cancelSignup($id)
+    {
+        $event = Event::Find($id);
+
+        //should check if event exists
+
+        // Find payment
+        $p = Payment::Where(['user_id' => Auth::id(), 'payable_type' => 'App\Event', 'payable_id' => $event->id])->first();
+        if ($p)
+            $p->forceDelete();
+        
+        $registration = Registration::Where(['user_id'=>Auth::id(), 'event_id'=>$event->id])->first();
+        if (!isset($registration)) {
+            Helper::message('Ej anmäld', 'Du är inte anmäld till evenemangent ' . $event->name, 'warning');
+            return redirect()->back();
+        }
+        $registration->forceDelete();
+        Helper::message('Anmäld','Du är nu avanmäld från evenemanget ' . $event->name, 'success');
         return redirect()->back();
     }
 }

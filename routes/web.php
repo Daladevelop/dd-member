@@ -35,12 +35,13 @@ Route::prefix('/mail')->middleware('auth')->group(function(){
 
 Route::prefix('/event')->middleware('auth')->group(function(){
     Route::get('', 'EventController@index')->name('events.index');
-    Route::get('/{id})','EventController@show')->name('events.show');
+    Route::get('/{id}','EventController@show')->name('events.show');
     Route::get('/edit/{id}', 'EventController@edit')->name('events.edit')->middleware('check.ability:edit_events');
     Route::post('/edit/{id}', 'EventController@update')->name('events.update')->middleware('check.ability:edit_events');
     Route::get('/create', 'EventController@create')->name('events.create')->middleware('check.ability:edit_events');
     Route::post('/create', 'EventController@store')->name('events.store')->middleware('check.ability:edit_events');
     Route::get('/delete/{id}', 'EventController@confirmDelete')->name('events.confirmDelete')->middleware('check.ability:delete_events');
     Route::delete('/delete/{id}', 'EventController@delete')->name('events.delete')->middleware('check.ability:delete_events');
-    Route::post('/signup/{id}', 'EventController@signup')->name('events.signup');
+    Route::get('/signup/{id}', 'EventController@signup')->name('events.signup');
+    Route::get('/cancelSignup/{id}','EventController@cancelSignup')->name('events.cancelSignup');
 });
