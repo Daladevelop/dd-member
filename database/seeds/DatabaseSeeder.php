@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $memberfee = new App\MemberFee;
+        $memberfee->year = \Carbon\Carbon::now()->year;
+        $memberfee->amount = 200;
+        $memberfee->amount_student = 100;
+        $memberfee->amount_child =50;
+        echo 'MemberFee create for year ' . $memberfee->year;
+
         $user = new App\User;
         $user->name = "Administrator";
         $user->email = "admin@example.com";
