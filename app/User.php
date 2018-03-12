@@ -65,4 +65,17 @@ class User extends Authenticatable
     {
         return in_array($member_type,$this->member_types);
     }
+
+    public function hasPaidThisYearsMemberFee(){
+        if(!count($this->payments)){
+            return false;
+        }
+        $memberFeePayments = $this->payments()->where('payable_type', '=','\App\Memberfee')->get();
+        if($memberFeePayments->count()){
+            $thisYears = $memberFeePayments->filter(function($payment){
+               return ($payment->payable->year == date('Y'));
+            });
+            return $thisYears->first()->is_paid;
+        }
+    }
 }

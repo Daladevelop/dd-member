@@ -8,7 +8,6 @@
             <div class="row items-push">
                 <div class="col-sm-7">
                     <h1 class="page-heading">
-
                         Betalningar
                     </h1>
                 </div>
@@ -38,6 +37,7 @@
                                 <th>Medlem</th>
                                 <th>Belopp</th>
                                 <th>Typ</th>
+                                <th>Referens</th>
                                 <th>Betald?</th>
                                 <th>Betald datum</th>
                                 <th></th>
@@ -50,6 +50,7 @@
                                 <td>{{$payment->user->name}}</td>
                                 <td>{{$payment->amount}} kr</td>
                                 <td>{{substr($payment->payable_type,4)}}</td>
+                                <td>{{$payment->ocr}}</td>
                                 <td>{{($payment->payment_date != null) ? 'Ja' : 'Nej' }}</td>
                                 <td>{{$payment->payment_date}}</td>
                                 
