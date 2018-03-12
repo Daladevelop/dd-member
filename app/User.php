@@ -61,8 +61,11 @@ class User extends Authenticatable
 
 
     public function hasPaidThisYearsMemberFee(){
-        $memberFeePayments = $this->payments()->where('payable_type', 'App\Memberfee')->get();
-        if($memberFeePayments){
+        if(!count($this->payments)){
+            return false;
+        }
+        $memberFeePayments = $this->payments()->where('payable_type', '=','\App\Memberfee')->get();
+        if($memberFeePayments->count()){
             $thisYears = $memberFeePayments->filter(function($payment){
                return ($payment->payable->year == date('Y'));
             });
