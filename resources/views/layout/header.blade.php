@@ -176,6 +176,12 @@
                                     class="sidebar-mini-hide">Betalningar</span></a>
                                 @endif
                                 </li>
+                            @if(Bouncer::can('edit_memberfees'))
+                            <li>
+                                <a href="{{route('memberfees.index')}}"><i class="si si-list"></i><span
+                                                class="sidebar-mini-hide">Medlemsavgifter</span></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <!-- END Side Content -->

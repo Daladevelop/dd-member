@@ -55,7 +55,12 @@
                         {{Form::label('personal_number', 'Personnummer',['class' => 'col-md-3'])}}
                         {{Form::text('personal_number', null, ['form-control'])}}
                     </div>
-
+                    @if(Auth::user()->can('edit_users'))
+                    <div class="form-group">
+                        {{Form::label('member_type', 'Medlemstyp',['class' => 'col-md-3'])}}
+                        {{Form::select('member_type', Config::get('enums.member_types'))}}
+                    </div>
+                    @endif
                     <div class="form-group">
                         {{Form::label('password', 'Lösenord', ['class' => 'col-md-3'])}}
                         {{Form::password('password',['form-control'] )}}

@@ -33,6 +33,7 @@
                                 <th>Ort</th>
                                 <th>Epost</th>
                                 <th>Telefonnummer</th>
+                                <th>Typ</th>
                                 <th>Verktyg</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td>{{$user->city}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
+                                <td>{{$user->member_type}}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{route('users.edit', $user->id)}}"><i class="fa fa-edit"></i></a>
                                     <a class="btn btn-success" href="{{route('mail.create')}}?type=to-user&id={{$user->id}}" alt="Skicka mail"><i class="si si-envelope"></i></a>

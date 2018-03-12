@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use  \App\User;
+use App\Helpers\Helper;
 use Bouncer;
 
 /**
@@ -32,6 +33,8 @@ class UserController extends Controller
         $user = new User();
         $user->fill($request->all());
 
+        $user->member_type = $request->member_type;
+
         $user->password = bcrypt($request->password);
 
         if ($request->admin) {
@@ -42,6 +45,33 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        $current_memberfee = \App\MemberFee::Where('year','=',\Carbon\Carbon::now()->year)->first();
+
+        if (isset($current_memberfee)) {
+            $payment = new \App\Payment();
+            $payment->user_id = $user->id;
+            
+            switch(\Config::get('enums.member_types')[$user->member_type])
+            {
+                case "Ordinarie":
+                    $payment->amount = $current_memberfee->amount;
+                    break;
+                case "Student":
+                    $payment->amount = $current_memberfee->amount_student;
+                    break;
+                case "Barn":
+                    $payment->amount = $current_memberfee->amount_child;
+                    break;
+                default:
+                    $payment->amount = 0;
+                    break;
+            }
+            
+            $current_memberfee->payments()->save($payment);
+        }
+        Helper::message('Medlem skapad', 'Medlemmen ' . $user->email . ' skapades.', 'success');
+
         return redirect()->route('users.index');
     }
 
@@ -64,15 +94,15 @@ class UserController extends Controller
                 return redirect('/');
             }
         } else {
-
+            $user->member_type = $request->member_type;
             if ($request->admin) {
                 Bouncer::assign('admin')->to($user);
             } else {
                 if (Bouncer::is($user)->a('admin'))
                     Bouncer::retract('admin')->from($user);
             }
-
         }
+           
 
 
         if (!$user) {

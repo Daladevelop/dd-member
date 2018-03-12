@@ -52,3 +52,9 @@ Route::prefix('/payment')->middleware('auth')->group(function() {
     Route::post('/pay/{id}', 'PaymentController@pay')->name('payments.pay');
     Route::get('/pay/{id}', 'PaymentController@paymentInstruction')->name('payments.paymentInstruction');
 });
+
+Route::prefix('/memberfee')->middleware('auth')->group(function() {
+    Route::get('', 'MemberFeeController@index')->name('memberfees.index')->middleware('check.ability:edit_memberfees');
+    Route::get('/create', 'MemberFeeController@create')->name('memberfees.create')->middleware('check.ability:edit_memberfees');
+    Route::post('/create', 'MemberFeeController@store')->name('memberfees.store')->middleware('check.ability:edit_memberfees');
+});
