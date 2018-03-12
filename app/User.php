@@ -58,4 +58,15 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany(\App\MemberGroup::class,'member_groups_users');
     }
+
+
+    public function hasPaidThisYearsMemberFee(){
+        $memberFeePayments = $this->payments()->where('payable_type', 'App\Memberfee')->get();
+        if($memberFeePayments){
+            $thisYears = $memberFeePayments->filter(function($payment){
+               return ($payment->payable->year == date('Y'));
+            });
+            return $thisYears->first()->is_paid;
+        }
+    }
 }

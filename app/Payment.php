@@ -15,6 +15,11 @@ class Payment extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function getIsPaidAttribute(){
+        return !empty($this->payment_date);
+    }
+
+
     public function save(array $options = [])
     {
         if(!$this->ocr) {
