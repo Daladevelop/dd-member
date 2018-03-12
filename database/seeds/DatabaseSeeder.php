@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $memberfee->amount = 200;
         $memberfee->amount_student = 100;
         $memberfee->amount_child =50;
-        echo 'MemberFee create for year ' . $memberfee->year;
+        $memberfee->save();
+        echo 'MemberFee create for year ' . $memberfee->year . "\r\n";
 
         $user = new App\User;
         $user->name = "Administrator";
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '123';
         $user->save();
         Bouncer::assign('admin')->to($user);
-        echo 'Created user admin@example.com with password admin';
+        echo 'Created user admin@example.com with password admin' . "\r\n";
 
         $event = new App\Event;
         $event->name = "My first event";
@@ -38,6 +39,6 @@ class DatabaseSeeder extends Seeder
         $event->max_participants = "30";
         $event->members_only = true;
         $event->save();
-        echo 'Created sample event';
+        echo 'Created sample event' . "\r\n";
     }
 }
