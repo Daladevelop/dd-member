@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $user->personal_number = '123';
         $user->city = 'Staden';
         $user->phone = '123';
+        $user->member_type = 'Ordinarie';
         $user->save();
         Bouncer::assign('admin')->to($user);
         echo 'Created user admin@example.com with password admin' . "\r\n";

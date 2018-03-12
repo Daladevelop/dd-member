@@ -58,7 +58,7 @@
                     @if(Auth::user()->can('edit_users'))
                     <div class="form-group">
                         {{Form::label('member_type', 'Medlemstyp',['class' => 'col-md-3'])}}
-                        {{Form::select('member_type', Config::get('enums.member_types'))}}
+                        {{Form::select('member_type', ['Ordinarie'=>'Ordinarie', 'Student'=>'Student','Barn'=>'Barn'])}}
                     </div>
                     @endif
                     <div class="form-group">

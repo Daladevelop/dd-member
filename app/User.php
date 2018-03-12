@@ -38,6 +38,8 @@ class User extends Authenticatable
         'groups'
     ];
 
+    protected $member_types = ['Ordinarie', 'Student', 'Barn'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -57,5 +59,10 @@ class User extends Authenticatable
      */
     public function groups(){
         return $this->belongsToMany(\App\MemberGroup::class,'member_groups_users');
+    }
+
+    public function isValidMemberType($member_type)
+    {
+        return in_array($member_type,$this->member_types);
     }
 }

@@ -17,7 +17,7 @@ class AddPersonalDataToUsers extends Migration
             $table->text('personal_number');
             $table->text('phone')->nullable();
             $table->text('city');
-            $table->enum('member_type', Config::get('enums.member_types'));
+            $table->text('member_type');
         });
     }
 

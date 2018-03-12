@@ -31,6 +31,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
+
+        if (!$user->isValidMemberType($request->member_type))
+        {
+            Helper::message('Invalid member_type', 'Invalid member_type: ' . $request->member_type, 'danger');
+            return redirect()->back();
+        }
+
         $user->fill($request->all());
 
         $user->member_type = $request->member_type;
@@ -52,7 +59,7 @@ class UserController extends Controller
             $payment = new \App\Payment();
             $payment->user_id = $user->id;
             
-            switch(\Config::get('enums.member_types')[$user->member_type])
+            switch($user->member_type)
             {
                 case "Ordinarie":
                     $payment->amount = $current_memberfee->amount;
@@ -88,6 +95,13 @@ class UserController extends Controller
     public function update($id, Request $request)
     {
         $user = User::Find($id);
+
+        if (!$user->isValidMemberType($request->member_type))
+        {
+            Helper::message('Invalid member_type', 'Invalid member_type: ' . $request->member_type, 'danger');
+            return redirect()->back();
+        }
+
         if (!Auth::user()->can('edit_users')) {
 
             if (!Auth::user() == $user) {
