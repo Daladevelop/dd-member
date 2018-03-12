@@ -37,7 +37,7 @@
                                 <th>Medlem</th>
                                 <th>Belopp</th>
                                 <th>Typ</th>
-                                <th>OCR</th>
+                                <th>Referens</th>
                                 <th>Betald?</th>
                                 <th>Betald datum</th>
                                 <th></th>
