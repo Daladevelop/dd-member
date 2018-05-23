@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Bouncer;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -51,6 +54,9 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'personal_number' => 'required|string|unique:users',
+            'city' => 'required|string',
+            'member_type' => 'required'
         ]);
     }
 
@@ -62,10 +68,54 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'personal_number' => $data['personal_number'],
+            'phone' => $data['phone'],
+            'city'  => $data['city'],
+            'member_type' => $data['member_type']
         ]);
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        Bouncer::assign('member')->to($user);
+        if(!\App\Memberfee::has_yearly_fee()){
+            Helper::createYearlyFee();
+        }
+        $current_memberfee = \App\MemberFee::Where('year','=',\Carbon\Carbon::now()->year)->first();
+
+        if (isset($current_memberfee)) {
+            $payment = new \App\Payment();
+            $payment->user_id = $user->id;
+
+            switch($user->member_type)
+            {
+                case "Ordinarie":
+                    $payment->amount = $current_memberfee->amount;
+                    break;
+                case "Student":
+                    $payment->amount = $current_memberfee->amount_student;
+                    break;
+                case "Barn":
+                    $payment->amount = $current_memberfee->amount_child;
+                    break;
+                default:
+                    $payment->amount = 0;
+                    break;
+            }
+
+            $current_memberfee->payments()->save($payment);
+        }
     }
 }

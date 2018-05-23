@@ -18,6 +18,7 @@ Route::prefix('/users')->middleware('auth')->group(function(){
 
 });
 
+
 Route::prefix('/groups')->middleware('auth')->group(function() {
     Route::get('', 'GroupController@index')->name('groups.index')->middleware('check.ability:edit_groups');
     Route::get('/create','GroupController@create')->name('groups.create')->middleware('check.ability:edit_groups');
@@ -51,6 +52,7 @@ Route::prefix('/payment')->middleware('auth')->group(function() {
     Route::get('/myPayments', 'PaymentController@myPayments')->name('payments.myPayments');
     Route::post('/pay/{id}', 'PaymentController@pay')->name('payments.pay');
     Route::get('/pay/{id}', 'PaymentController@paymentInstruction')->name('payments.paymentInstruction');
+    
 });
 
 Route::prefix('/memberfee')->middleware('auth')->group(function() {

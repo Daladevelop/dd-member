@@ -163,10 +163,12 @@
                                                 class="sidebar-mini-hide">Maila alla</span></a>
                             </li>
                         @endif
+                        @if(Bouncer::can('edit_events'))
                             <li>
                                 <a href="{{route('events.index')}}"><i class="si si-calendar"></i><span
                                                 class="sidebar-mini-hide">Evenemang</span></a>
                             </li>
+                        @endif
                             <li>
                                 @if(Bouncer::can('edit_payments'))
                                     <a href="{{route('payments.index')}}"><i class="si si-wallet"></i><span

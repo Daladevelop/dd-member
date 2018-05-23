@@ -95,11 +95,12 @@ class UserController extends Controller
     public function update($id, Request $request)
     {
         $user = User::Find($id);
+        if ($request->member_type) {
 
-        if (!$user->isValidMemberType($request->member_type))
-        {
-            Helper::message('Invalid member_type', 'Invalid member_type: ' . $request->member_type, 'danger');
-            return redirect()->back();
+            if (!$user->isValidMemberType($request->member_type)) {
+                Helper::message('Invalid member_type', 'Invalid member_type: ' . $request->member_type, 'danger');
+                return redirect()->back();
+            }
         }
 
         if (!Auth::user()->can('edit_users')) {
@@ -108,7 +109,9 @@ class UserController extends Controller
                 return redirect('/');
             }
         } else {
-            $user->member_type = $request->member_type;
+            if($request->member_type) {
+                $user->member_type = $request->member_type;
+            }
             if ($request->admin) {
                 Bouncer::assign('admin')->to($user);
             } else {
@@ -135,4 +138,6 @@ class UserController extends Controller
         return redirect()->back();
 
     }
+
+
 }

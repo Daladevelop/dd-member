@@ -11,19 +11,28 @@
                     <div class="block-header bg-success">
                         <ul class="block-options">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#modal-terms">View Terms</a>
+                                <a href="#" data-toggle="modal" data-target="#modal-terms">Villkor och personuppgifter</a>
                             </li>
                             <li>
                                 <a href="{{ url('/login') }}" data-toggle="tooltip" data-placement="left"
                                    title="Log In"><i class="si si-login"></i></a>
                             </li>
                         </ul>
-                        <h3 class="block-title">Register</h3>
+                        <h3 class="block-title">Bli medlem</h3>
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                         <!-- Register Title -->
                         <h1 class="h2 font-w600 push-30-t push-5">{{ env('APP_NAME') }}</h1>
-                        <p>Please fill the following details to create a new account.</p>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <p>Fyll i nedanstående fält för att bli medlem.</p>
                         <!-- END Register Title -->
 
                         <!-- Register Form -->
@@ -35,51 +44,92 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <input class="form-control" type="text" id="register-username"
-                                               name="register-username" placeholder="Please enter a username">
-                                        <label for="register-username">Username</label>
+                                        <input class="form-control" type="text" id="name"
+                                               name="name" placeholder="Ange ditt namn">
+                                        <label for="name">För och efternamn</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <input class="form-control" type="email" id="register-email"
-                                               name="register-email" placeholder="Please provide your email">
-                                        <label for="register-email">Email</label>
+                                        <input class="form-control" type="email" id="email"
+                                               name="email" placeholder="Ange en epost">
+                                        <label for="email">Epost</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <input class="form-control" type="password" id="register-password"
-                                               name="register-password" placeholder="Choose a strong password..">
-                                        <label for="register-password">Password</label>
+                                        <input class="form-control" type="password" id="password"
+                                               name="password" placeholder="Välj ett lösenord..">
+                                        <label for="password">Lösenord</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <input class="form-control" type="password" id="register-password2"
-                                               name="register-password2" placeholder="..and confirm it">
-                                        <label for="register-password2">Confirm Password</label>
+                                        <input class="form-control" type="password" id="password_confirmation"
+                                               name="password_confirmation" placeholder="..och upprepa det">
+                                        <label for="password_confirmation">Upprepa lösenordet</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="personal_number"
+                                               name="personal_number" placeholder="Personnummer, 10 siffror">
+                                        <label for="personal_number">Personnummer</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="phone"
+                                               name="phone" placeholder="Telefonnummer">
+                                        <label for="phone">Telefonnummer</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="city"
+                                               name="city" placeholder="Ort">
+                                        <label for="city">Ort</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <select class="form-control" id="member_type"
+                                               name="member_type">
+                                            <option>Jag är:</option>
+                                            <option value="Ordinarie">Över 20 år</option>
+                                            <option value="Student">Mellan 13 och 20</option>
+                                            <option value="Barn">Under 13 år</option>
+                                        </select>
+                                        <label for="personal_number">Medlemstyp</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label class="css-input switch switch-sm switch-success">
-                                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> I
-                                        agree with terms &amp; conditions
+                                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> Jag godkänner Daladevelops villkor samt ger mitt samtycke till att Daladevelop använder mina personuppgifter i syfte att föra register över sina medlemmar. Jag godkänner även att Daladevelop använder mina personuppgifter till att skicka epost till mig gällande föreningens verksamheter.
                                     </label>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-12 col-sm-6 col-md-5">
                                     <button class="btn btn-block btn-success" type="submit"><i
-                                                class="fa fa-plus pull-right"></i> Sign Up
+                                                class="fa fa-plus pull-right"></i> Bli medlem
                                     </button>
                                 </div>
                             </div>
@@ -106,7 +156,7 @@
                                 <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                             </li>
                         </ul>
-                        <h3 class="block-title">Terms &amp; Conditions</h3>
+                        <h3 class="block-title">Villkor</h3>
                     </div>
                     <div class="block-content">
                         <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
@@ -117,8 +167,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> I agree</button>
+                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Stäng</button>
+                    <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Jag godkänner</button>
                 </div>
             </div>
         </div>

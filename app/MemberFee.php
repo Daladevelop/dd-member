@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\Traits\Payable;
 
@@ -21,5 +22,12 @@ class Memberfee extends Model
     public function number_unpaid()
     {
         return $this->payments()->whereNull('payment_date')->count();
+    }
+
+    public static function has_yearly_fee(){
+        return self::get_yearly_fee() ? true : false;
+    }
+    public static function get_yearly_fee(){
+        return self::where('year',date('Y'))->get()->first();
     }
 }
